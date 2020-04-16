@@ -8,7 +8,7 @@
         xmlns:views="clr-namespace:BillingManagement.UI.Views"
         mc:Ignorable="d"
         Title="Gestion de clients" Width="800" Height="500"
-        MinHeight="600" MinWidth="640">
+        MinHeight="800" MinWidth="900">
     <Window.Resources>
         <DataTemplate DataType="{x:Type vm:CustomerViewModel}">
             <views:CustomersView DataContext="{Binding}"/>

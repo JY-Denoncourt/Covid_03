@@ -11,14 +11,19 @@
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
+        
         <Grid Grid.Row="0" Grid.Column="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
+            
+            
             <StackPanel Margin="6" Orientation="Horizontal" x:Name="spHeader">
                 <TextBlock Text="Liste des clients" />
             </StackPanel>
+            
+            
             <ListView Grid.Row="1" ItemsSource="{Binding Customers}"
                           SelectedItem="{Binding SelectedCustomer}"
                           x:Name="lvCustomers">
@@ -29,7 +34,9 @@
                 </ListView.ItemTemplate>
             </ListView>
         </Grid>
-        <Grid Grid.Column="1" Margin="6">
+        
+        
+        <Grid Grid.Column="1" Margin="15,0,0,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="{Binding ElementName=spHeader,Path=ActualHeight}"/>
                 <RowDefinition Height="Auto"/>
@@ -41,41 +48,49 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
-
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
+            
+            
             <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" Margin="3">
                 <TextBlock Text="Prénom :" Width="75"/>
                 <TextBox MinWidth="125" Text="{Binding SelectedCustomer.Name}"/>
             </StackPanel>
+            
             <StackPanel Grid.Row="1" Grid.Column="1" 
                             Orientation="Horizontal" Margin="3">
                 <TextBlock Text="Nom :" Width="75"/>
                 <TextBox MinWidth="125" Text="{Binding SelectedCustomer.LastName}"/>
             </StackPanel>
+            
             <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" 
                             Orientation="Horizontal" Margin="3" >
                 <TextBlock Text="Adresse :" Width="75"/>
                 <TextBox MinWidth="250" Text="{Binding SelectedCustomer.Address}"/>
             </StackPanel>
+            
             <StackPanel Grid.Row="3" Grid.Column="0"
                             Orientation="Horizontal" Margin="3" >
                 <TextBlock Text="Ville :" Width="75"/>
                 <TextBox MinWidth="175" Text="{Binding SelectedCustomer.City}"/>
             </StackPanel>
+            
             <StackPanel Grid.Row="3" Grid.Column="1" 
                             Orientation="Horizontal" Margin="3">
                 <TextBlock Text="Province :" Width="75"/>
                 <TextBox MinWidth="50" Text="{Binding SelectedCustomer.Province}"/>
             </StackPanel>
+            
             <StackPanel Grid.Row="4" Grid.Column="0" 
                             Orientation="Horizontal" Margin="3">
                 <TextBlock Text="Code postal :" Width="75"/>
                 <TextBox MinWidth="125" Text="{Binding SelectedCustomer.PostalCode}"/>
             </StackPanel>
+            
             <StackPanel Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"
                             Orientation="Horizontal" Margin="3">
                 <TextBlock Text="Contact :" Width="75"/>
@@ -86,17 +101,36 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-
-
             </StackPanel>
 
+            <Image Grid.Row="5" Grid.Column="1" Margin="6"
+                       Source="{Binding SelectedCustomer.PicturePath}"
+                       Stretch="Uniform" MaxHeight="125" MaxWidth="125"/>
 
-            <StackPanel Grid.Row="7" Grid.Column="2" Margin="6">
+            <StackPanel Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2">
+                <Button Content="Nouvelle Facture" Width="100"  HorizontalAlignment="Left"/>
+
+                <DataGrid ItemsSource="{Binding SelectedCustomer.Invoices}" AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Facture" Binding="{Binding Info}"/>
+                        <DataGridTextColumn Header="ID" Binding="{Binding InvoiceId}"/>
+                        <DataGridTextColumn Header="Total $" Binding="{Binding Total}"/>
+                        <DataGridTemplateColumn Header="Actions">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button>Voir</Button>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+            
+            <StackPanel Grid.Row="8" Grid.Column="2" Margin="6">
                 <Button Content="Supprimer client" Command="{Binding DeleteCustomerCommand}" CommandParameter="{Binding SelectedCustomer}"/>
             </StackPanel>
-            <Image Margin="6" Grid.Row="8"
-                       Source="{Binding SelectedCustomer.PicturePath}"
-                       Stretch="Uniform"/>
+            
+           
         </Grid>
     </Grid>
 </UserControl>
