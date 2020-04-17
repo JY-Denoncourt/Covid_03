@@ -1,5 +1,6 @@
 ﻿using BillingManagement.Business;
 using BillingManagement.Models;
+using BillingManagement.UI.ViewModels.Commands;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -10,14 +11,13 @@ namespace BillingManagement.UI.ViewModels
 {
 	class InvoiceViewModel : BaseViewModel
 	{
+		//------------------------------------------------------------------Variables
+
 		private Invoice selectedInvoice;
 		private ObservableCollection<Invoice> invoices;
 
-		public InvoiceViewModel(IEnumerable<Customer> customerData)
-		{
-			InvoicesDataService ids = new InvoicesDataService(customerData);
-			Invoices = new ObservableCollection<Invoice>(ids.GetAll().ToList());
-		}
+
+		//-----------------------------------------------------------------Definitions
 
 		public Invoice SelectedInvoice
 		{
@@ -28,13 +28,32 @@ namespace BillingManagement.UI.ViewModels
 			}
 		}
 
-		public ObservableCollection<Invoice> Invoices { 
+		public ObservableCollection<Invoice> Invoices
+		{
 			get => invoices;
-			set { 
+			set
+			{
 				invoices = value;
 				OnPropertyChanged();
 			}
 		}
+
+
+		
+		
+
+		//-----------------------------------------------------------------Constructeurs
+
+		public InvoiceViewModel(IEnumerable<Customer> customerData)
+		{
+			InvoicesDataService ids = new InvoicesDataService(customerData);
+			Invoices = new ObservableCollection<Invoice>(ids.GetAll().ToList());
+
+		}
+
+		//-----------------------------------------------------------------Methodes
+
+
 
 	}
 }

@@ -5,30 +5,30 @@ using System.Windows.Input;
 
 namespace BillingManagement.UI.ViewModels.Commands
 {
-    public class ChangeViewCommand : ICommand
+    public class RelayCommand : ICommand
     {
-        //--------------------------------------------------------Variables
-        
         readonly Action<Object> _execute;
         readonly Predicate<Object> _canExecute;
 
-        //-------------------------------------------------------Constructeurs
 
-        public ChangeViewCommand(Action<Object> execute, Predicate<Object> canExecute)
+        //----------------------------------------------------------------------------Constructeurs
+
+        public RelayCommand(Action<Object> execute, Predicate<Object> canExecute)
         {
             if (execute == null)
-                throw new NullReferenceException("execute");
+                throw new NullReferenceException("execuste");
 
             _execute = execute;
             _canExecute = canExecute;
         }
 
-        public ChangeViewCommand(Action<Object> execute) : this(execute, null)
+        public RelayCommand(Action<Object> execute) : this(execute, null)
         {
 
         }
 
-        //-------------------------------------------------------Methodes
+
+        //----------------------------------------------------------------------------Methodes
 
         public event EventHandler CanExecuteChanged
         {
@@ -36,14 +36,18 @@ namespace BillingManagement.UI.ViewModels.Commands
             remove { CommandManager.RequerySuggested -= value; }
         }
 
+
+
         public bool CanExecute(object parameter)
         {
             return _canExecute == null ? true : _canExecute(parameter);
         }
 
+
+
         public void Execute(object parameter)
         {
-            _execute.Invoke(parameter as string);
+            _execute.Invoke(parameter);
         }
     }
 }

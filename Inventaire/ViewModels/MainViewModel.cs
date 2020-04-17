@@ -7,7 +7,14 @@ namespace BillingManagement.UI.ViewModels
 {
     class MainViewModel : BaseViewModel
     {
+		//------------------------------------------------------------Variables
+		
 		private BaseViewModel _vm;
+
+		CustomerViewModel customerViewModel;
+		InvoiceViewModel invoiceViewModel;
+		
+		//------------------------------------------------------------Definitions
 
 		public BaseViewModel VM
 		{
@@ -18,14 +25,15 @@ namespace BillingManagement.UI.ViewModels
 			}
 		}
 
-		CustomerViewModel customerViewModel;
-		InvoiceViewModel invoiceViewModel;
-
 		public ChangeViewCommand ChangeViewCommand { get; set; }
+		
+
+		//------------------------------------------------------------Constructeurs
 
 		public MainViewModel()
 		{
 			ChangeViewCommand = new ChangeViewCommand(ChangeView);
+
 
 			customerViewModel = new CustomerViewModel();
 			invoiceViewModel = new InvoiceViewModel(customerViewModel.Customers);
@@ -34,9 +42,12 @@ namespace BillingManagement.UI.ViewModels
 
 		}
 
-		private void ChangeView(string vm)
+		//------------------------------------------------------------Methodes
+
+
+		public void ChangeView(Object vm)
 		{
-			switch (vm)
+			switch ((string)vm)
 			{
 				case "customers":
 					VM = customerViewModel;
@@ -45,6 +56,28 @@ namespace BillingManagement.UI.ViewModels
 					VM = invoiceViewModel;
 					break;
 			}
+		}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		
+		public bool DelCustomerCanUse(Object message)
+		{
+			if (customerViewModel.SelectedCustomer.Invoices == null)
+				return false;
+
+			return true;
 		}
 
 	}

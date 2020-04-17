@@ -11,5 +11,7 @@ namespace BillingManagement.UI.Views
         {
             InitializeComponent();
         }
+
+       
     }
 }

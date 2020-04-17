@@ -110,11 +110,11 @@
             <StackPanel Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2">
                 <Button Content="Nouvelle Facture" Width="100"  HorizontalAlignment="Left"/>
 
-                <DataGrid ItemsSource="{Binding SelectedCustomer.Invoices}" AutoGenerateColumns="False">
+                <DataGrid x:Name="DG_Invoices" ItemsSource="{Binding SelectedCustomer.Invoices}" AutoGenerateColumns="False">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Facture" Binding="{Binding Info}"/>
                         <DataGridTextColumn Header="ID" Binding="{Binding InvoiceId}"/>
-                        <DataGridTextColumn Header="Total $" Binding="{Binding Total}"/>
+                        <DataGridTextColumn Header="Total $" Binding="{Binding Total, StringFormat={}{0:C2}}"/>
                         <DataGridTemplateColumn Header="Actions">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
@@ -127,7 +127,8 @@
             </StackPanel>
             
             <StackPanel Grid.Row="8" Grid.Column="2" Margin="6">
-                <Button Content="Supprimer client" Command="{Binding DeleteCustomerCommand}" CommandParameter="{Binding SelectedCustomer}"/>
+                <Button Content="Supprimer client" Command="{Binding DeleteCustomerCommand}" 
+                        CommandParameter="{Binding SelectedCustomer}"/>
             </StackPanel>
             
            

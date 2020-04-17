@@ -17,6 +17,8 @@
             <views:InvoicesView DataContext="{Binding}" />
         </DataTemplate>
     </Window.Resources>
+    
+    
     <DockPanel>
         <StackPanel DockPanel.Dock="Top">
             <Menu>
@@ -29,20 +31,25 @@
                     <Separator/>
                     <MenuItem Header="_Quitter" Click="Exit_Click"/>
                 </MenuItem>
+                
                 <MenuItem Header="_Édition">
                     <MenuItem Header="Couper..."/>
                     <MenuItem Header="Copier"/>
                     <MenuItem Header="Coller"/>
                 </MenuItem>
+                
                 <MenuItem Header="Affichage">
                     <MenuItem Header="Clients" Command="{Binding ChangeViewCommand}" CommandParameter="customers"/>
                     <MenuItem Header="Factures" Command="{Binding ChangeViewCommand}" CommandParameter="invoices"/>
                 </MenuItem>
+                
                 <MenuItem Header="Enregistrement">
                     <MenuItem Header="Nouveau" Command="{Binding NewItemCommand}"/>
                 </MenuItem>
             </Menu>
         </StackPanel>
+        
+        
         <ToolBar DockPanel.Dock="Top">
             <Button >
                 <Image Source="/images/new_user.png" Height="32" Width="32" Stretch="Uniform"/>
@@ -52,6 +59,8 @@
                 <Image Source="/images/exit.png" Height="32" Width="32" Stretch="Uniform"/>
             </Button>
         </ToolBar>
+        
+        
         <StatusBar DockPanel.Dock="Bottom" Height="25">
             <TextBlock Text="Barre de statut " />
         </StatusBar>
