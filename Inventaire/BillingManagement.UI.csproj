@@ -7,6 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="ViewModels\Commands\ChangeViewCommand.cs" />
+    <Compile Remove="ViewModels\Commands\DeleteCustomerCommand.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="images\exit.png" />
     <None Remove="images\new_user.png" />
     <None Remove="images\user.png" />

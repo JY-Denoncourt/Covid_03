@@ -29,8 +29,8 @@ namespace BillingManagement.UI.ViewModels
 		public RelayCommand NewCustomerCommand { get; private set; }
 		public RelayCommand NewInvoiceCommand { get; private set; }
 		public RelayCommand DisplayInvoiceCommand { get; private set; }
-		//public RelayCommand DisplayCustomerCommand { get; private set; }
-		public ChangeViewCommand ChangeViewCommand { get; set; }
+		public RelayCommand DisplayCustomerCommand { get; private set; }
+		public RelayCommand ChangeViewCommand { get; set; }
 		
 
 		//------------------------------------------------------------Constructeurs
@@ -40,9 +40,9 @@ namespace BillingManagement.UI.ViewModels
 			NewCustomerCommand = new RelayCommand(NewCustomer);
 			NewInvoiceCommand = new RelayCommand(NewInvoice, CanExecuteNewInvoice);
 
-			ChangeViewCommand = new ChangeViewCommand(ChangeView);
+			ChangeViewCommand = new RelayCommand(ChangeView);
 			DisplayInvoiceCommand = new RelayCommand(DisplayInvoice);
-
+			DisplayCustomerCommand = new RelayCommand(DisplayCustomer, CanExecuteDisplayCustomer);
 
 			customerViewModel = new CustomerViewModel();
 			invoiceViewModel = new InvoiceViewModel(customerViewModel.Customers);
@@ -65,6 +65,7 @@ namespace BillingManagement.UI.ViewModels
 		}
 
 
+
 		private void NewInvoice(object c)
 		{
 			Customer customer = (Customer)c;
@@ -79,6 +80,7 @@ namespace BillingManagement.UI.ViewModels
 		{
 			return c == null ? false : true;
 		}
+
 
 
 		public void ChangeView(Object vm)
@@ -105,9 +107,18 @@ namespace BillingManagement.UI.ViewModels
 		}
 
 
+		private void DisplayCustomer(object c)
+		{
+			Customer customer = (Customer)c;
 
+			customerViewModel.SelectedCustomer = customer;
+			VM = customerViewModel;
+		}
 
-
+		private bool CanExecuteDisplayCustomer(object c)
+		{
+			return c == null ? false : true;
+		}
 
 
 
