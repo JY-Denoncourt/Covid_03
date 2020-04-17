@@ -39,15 +39,16 @@ namespace BillingManagement.UI.ViewModels
         }
 
 
-        public ChangeViewCommand ChangeViewCommand { get; set; }
-
         public RelayCommand DeleteCustomerCommand { get; private set; }
+        public RelayCommand ChangeViewCommand { get; set; }
+
+        
 
         //------------------------------------------------------------------------------Constructeur
 
         public CustomerViewModel()
         {
-            
+            ChangeViewCommand = new RelayCommand(ChangeView);
             DeleteCustomerCommand = new RelayCommand(DeleteCustomer, canDeleteCustomer);
             
             InitValues();
@@ -61,7 +62,14 @@ namespace BillingManagement.UI.ViewModels
             Debug.WriteLine(Customers.Count);
         }
 
+        #region //RelayCommand pour le ChangeViewCommand
+        private void ChangeView(Object Invoice)
+        {
 
+        }
+        #endregion
+
+        #region //RelayCommand pour le DeleteCustomerCommand
         private void DeleteCustomer(Object C)
         {
             Customer customer = (Customer)C;
@@ -74,7 +82,6 @@ namespace BillingManagement.UI.ViewModels
 
             Customers.Remove(customer);
         }
-
        
         private bool canDeleteCustomer(Object C)
         {
@@ -83,5 +90,6 @@ namespace BillingManagement.UI.ViewModels
             Customer customer = (Customer)C;
             return customer.Invoices.Count == 0;
         }
+        #endregion
     }
 }
