@@ -48,7 +48,6 @@ namespace BillingManagement.UI.ViewModels
 
         public CustomerViewModel()
         {
-            ChangeViewCommand = new RelayCommand(ChangeView);
             DeleteCustomerCommand = new RelayCommand(DeleteCustomer, canDeleteCustomer);
             
             InitValues();
@@ -62,12 +61,7 @@ namespace BillingManagement.UI.ViewModels
             Debug.WriteLine(Customers.Count);
         }
 
-        #region //RelayCommand pour le ChangeViewCommand
-        private void ChangeView(Object Invoice)
-        {
-
-        }
-        #endregion
+      
 
         #region //RelayCommand pour le DeleteCustomerCommand
         private void DeleteCustomer(Object C)

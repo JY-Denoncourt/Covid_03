@@ -2,6 +2,7 @@
 using BillingManagement.UI.ViewModels.Commands;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 
 namespace BillingManagement.UI.ViewModels
@@ -41,7 +42,7 @@ namespace BillingManagement.UI.ViewModels
 			NewInvoiceCommand = new RelayCommand(NewInvoice, CanExecuteNewInvoice);
 
 			ChangeViewCommand = new RelayCommand(ChangeView);
-			DisplayInvoiceCommand = new RelayCommand(DisplayInvoice);
+			DisplayInvoiceCommand = new RelayCommand(DisplayInvoice, CanExecuteDisplayInvoice);
 			DisplayCustomerCommand = new RelayCommand(DisplayCustomer, CanExecuteDisplayCustomer);
 
 			customerViewModel = new CustomerViewModel();
@@ -51,10 +52,10 @@ namespace BillingManagement.UI.ViewModels
 
 		}
 
-		//------------------------------------------------------------Methodes
+        //------------------------------------------------------------Methodes
 
-
-		private void NewCustomer(object c)
+        #region //Create New Invoice or New Customer
+        private void NewCustomer(object c)
 		{
 			Customer customer = new Customer();
 
@@ -64,7 +65,7 @@ namespace BillingManagement.UI.ViewModels
 			VM = customerViewModel;
 		}
 
-
+		//-------------------------------------------------
 
 		private void NewInvoice(object c)
 		{
@@ -80,10 +81,13 @@ namespace BillingManagement.UI.ViewModels
 		{
 			return c == null ? false : true;
 		}
+        #endregion
 
 
 
-		public void ChangeView(Object vm)
+
+        #region //Display entre les view
+        public void ChangeView(Object vm)
 		{
 			switch ((string)vm)
 			{
@@ -97,14 +101,34 @@ namespace BillingManagement.UI.ViewModels
 		}
 
 
+		//-------------------------------------------------
+
+
 		private void DisplayInvoice(Object i)
 		{
-			Invoice invoice = (Invoice)i;
+			var invoice = (Invoice)i;
 
 			invoiceViewModel.SelectedInvoice = invoice;
 			VM = invoiceViewModel;
-
 		}
+
+		private bool CanExecuteDisplayInvoice(object i)
+		{
+			try
+			{
+				var invoice = (Invoice)i;
+				if (invoice != null) return true;
+				else return false;
+			}
+			catch
+			{
+				Debug.WriteLine("Error");
+				return false;
+			}
+		}
+
+
+		//-------------------------------------------------
 
 
 		private void DisplayCustomer(object c)
@@ -120,12 +144,7 @@ namespace BillingManagement.UI.ViewModels
 			return c == null ? false : true;
 		}
 
+        #endregion
 
-
-
-
-
-		
-		
-	}
+    }
 }

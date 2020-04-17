@@ -57,10 +57,11 @@
             </StackPanel>
             
             
-            <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding SelectedInvoice.SubTotal, StringFormat={}{0:C2}}"/>
-            <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding SelectedInvoice.FedTax, StringFormat={}{0:C2}, Mode=OneWay}"/>
-            <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding SelectedInvoice.ProvTax, StringFormat={}{0:C2}, Mode=OneWay}"/>
-            <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding SelectedInvoice.Total, StringFormat={}{0:C2}, Mode=OneWay}"/>
+            <TextBox   Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" TextAlignment="Right" MinWidth="75"
+                       Text="{Binding SelectedInvoice.SubTotal, StringFormat={}{0:C2}}" />
+            <TextBlock Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center" Text="{Binding SelectedInvoice.FedTax, StringFormat={}{0:C2}}"/>
+            <TextBlock Grid.Row="5" Grid.Column="1" HorizontalAlignment="Center" Text="{Binding SelectedInvoice.ProvTax, StringFormat={}{0:C2}}"/>
+            <TextBlock Grid.Row="6" Grid.Column="1" HorizontalAlignment="Center" Text="{Binding SelectedInvoice.Total, StringFormat={}{0:C2}}"/>
         </Grid>
 
     </Grid>

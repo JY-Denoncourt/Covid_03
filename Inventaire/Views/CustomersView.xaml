@@ -115,13 +115,13 @@
 
                 <DataGrid x:Name="DG_Invoices" ItemsSource="{Binding SelectedCustomer.Invoices}" AutoGenerateColumns="False">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Facture" Binding="{Binding Info}"/>
-                        <DataGridTextColumn Header="ID" Binding="{Binding InvoiceId}"/>
-                        <DataGridTextColumn Header="Total $" Binding="{Binding Total, StringFormat={}{0:C2}}"/>
-                        <DataGridTemplateColumn Header="Actions">
+                        <DataGridTextColumn Header="Facture" Binding="{Binding Info, Mode=OneWay}"/>
+                        <DataGridTextColumn Header="ID" Binding="{Binding InvoiceId, Mode=OneWay}"/>
+                        <DataGridTextColumn Header="Total $" Binding="{Binding Total, StringFormat={}{0:C2}, Mode=OneWay}"/>
+                        <DataGridTemplateColumn Header="Actions" >
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button Command="{Binding DataContext.DisplayInvoiceCommand,
+                                    <Button Command="{Binding DataContext.DisplayInvoiceCommand, Mode=OneWay,
                                             RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DockPanel}}"
                                             CommandParameter="{Binding}">
                                             Voir
