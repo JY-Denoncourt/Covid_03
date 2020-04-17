@@ -27,8 +27,9 @@ namespace BillingManagement.UI.ViewModels
 		}
 
 		public RelayCommand NewCustomerCommand { get; private set; }
+		public RelayCommand NewInvoiceCommand { get; private set; }
 		public RelayCommand DisplayInvoiceCommand { get; private set; }
-		public RelayCommand DisplayCustomerCommand { get; private set; }
+		//public RelayCommand DisplayCustomerCommand { get; private set; }
 		public ChangeViewCommand ChangeViewCommand { get; set; }
 		
 
@@ -37,6 +38,8 @@ namespace BillingManagement.UI.ViewModels
 		public MainViewModel()
 		{
 			NewCustomerCommand = new RelayCommand(NewCustomer);
+			NewInvoiceCommand = new RelayCommand(NewInvoice, CanExecuteNewInvoice);
+
 			ChangeViewCommand = new ChangeViewCommand(ChangeView);
 			DisplayInvoiceCommand = new RelayCommand(DisplayInvoice);
 
@@ -60,6 +63,23 @@ namespace BillingManagement.UI.ViewModels
 
 			VM = customerViewModel;
 		}
+
+
+		private void NewInvoice(object c)
+		{
+			Customer customer = (Customer)c;
+			Invoice invoice = new Invoice(customer);
+
+			customer.Invoices.Add(invoice);
+
+			DisplayInvoice(invoice);
+		}
+
+		private bool CanExecuteNewInvoice(object c)
+		{
+			return c == null ? false : true;
+		}
+
 
 		public void ChangeView(Object vm)
 		{

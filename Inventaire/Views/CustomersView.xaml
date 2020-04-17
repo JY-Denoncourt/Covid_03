@@ -108,7 +108,10 @@
                        Stretch="Uniform" MaxHeight="125" MaxWidth="125"/>
 
             <StackPanel Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2">
-                <Button Content="Nouvelle Facture" Width="100"  HorizontalAlignment="Left"/>
+                <Button Content="Nouvelle Facture" Width="100"  HorizontalAlignment="Left"
+                        Command="{Binding DataContext.NewInvoiceCommand,
+                        RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DockPanel}}"
+                        CommandParameter="{Binding SelectedCustomer}"/>
 
                 <DataGrid x:Name="DG_Invoices" ItemsSource="{Binding SelectedCustomer.Invoices}" AutoGenerateColumns="False">
                     <DataGrid.Columns>
